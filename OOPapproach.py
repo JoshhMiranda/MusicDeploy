@@ -8,12 +8,14 @@ Created on Mon May  3 23:07:27 2021
 import pandas as pd
 import numpy as np
 from scipy.sparse import csr_matrix
-from sklearn.neighbors import NearestNeighbors
+import pickle
 
 
 song_df_normalised = pd.read_csv("datasets/song_df_normalised.csv")
 song_df_normalised.head()
 
+pickle_in = open("nn_model.pkl","rb")
+model_nn = pickle.load(pickle_in)
 
 global recommended_song_list
 recommended_song_list =[]
@@ -26,7 +28,7 @@ def getsimilarsongs(song_name):
            'playlist_name', 'playlist_genre', 'playlist_subgenre','language'],axis=1,inplace=True)
     #song_features.head()
     song_features_csr = csr_matrix(song_features.values)
-    model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
+    #model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
     model_nn.fit(song_features_csr)
 
     temp = song_features.copy()
@@ -53,7 +55,7 @@ def getartistsongs(artist_name,song_name):
 
     artist_song_features_csr = csr_matrix(artist_song_features.values)
 
-    model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
+    #model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
     model_nn.fit(artist_song_features_csr)
 
     temp = artist_song_features.copy()
@@ -88,7 +90,7 @@ def getsongsgenre(genre,song_name):
 
     genre_song_features_csr = csr_matrix(genre_song_features.values)
 
-    model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
+    #model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
     model_nn.fit(genre_song_features_csr)
 
     temp = genre_song_features.copy()
@@ -118,7 +120,7 @@ def getsongsubgenre(subgenre,song_name):
 
     subgenre_song_features_csr = csr_matrix(subgenre_song_features.values)
 
-    model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
+    #model_nn = NearestNeighbors(metric='cosine',algorithm='brute')
     model_nn.fit(subgenre_song_features_csr)
 
     temp = subgenre_song_features.copy()
