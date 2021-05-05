@@ -184,7 +184,8 @@ def main():
     song_df_normalised = pd.read_csv("datasets/song_df_normalised.csv")
     
     try:
-        song_name =song_df_normalised[song_df_normalised['track_name'].str.contains(userinput)]['track_name'].tolist()[0]
+        song_dataset =song_df_normalised[song_df_normalised['track_name'].str.contains(userinput)]['track_name'].tolist()
+        song_name = st.selectbox("choose your song", song_dataset)
     
     except IndexError:
         #print("Sorry!! We couldnt get any results for", userinput, " :( ")
