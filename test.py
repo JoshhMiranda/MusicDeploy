@@ -7,6 +7,7 @@ Created on Tue May  4 21:15:40 2021
 
 import streamlit as st
 import pandas as pd
+import numpy as np
 from OOPapproach import *
 import base64
 
