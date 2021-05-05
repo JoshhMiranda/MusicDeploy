@@ -2,7 +2,6 @@
 
 import streamlit as st
 import pandas as pd
-from OOPapproach import *
 import base64
 from scipy.sparse import csr_matrix
 import pickle
