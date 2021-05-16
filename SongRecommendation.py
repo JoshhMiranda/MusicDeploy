@@ -9,8 +9,10 @@ import streamlit as st
 import pandas as pd
 from OOPapproach import *
 import base64
-from nltk.sentiment.vader import  SentimentIntensityAnalyzer
+import nltk
+nltk.download('vader_lexicon')
 
+from nltk.sentiment.vader import  SentimentIntensityAnalyzer
 
 def songrecommender(username):
 
