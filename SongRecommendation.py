@@ -11,7 +11,8 @@ from OOPapproach import *
 import base64
 from nltk.sentiment.vader import  SentimentIntensityAnalyzer
 import streamlit.components.v1 as components
-
+import nltk
+nltk.download('vader_lexicon')
 
 def songrecommender():
 
