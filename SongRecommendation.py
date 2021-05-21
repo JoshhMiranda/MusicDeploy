@@ -9,14 +9,13 @@ import streamlit as st
 import pandas as pd
 from OOPapproach import *
 import base64
-import nltk
-nltk.download('vader_lexicon')
-
 from nltk.sentiment.vader import  SentimentIntensityAnalyzer
+import streamlit.components.v1 as components
 
-def songrecommender(username):
 
-    mood = st.text_input("How are you today "+str(username)+"?")
+def songrecommender():
+
+    mood = st.text_input("How are you today ?")
     
     score = SentimentIntensityAnalyzer().polarity_scores(mood)
     if score['compound'] >= 0.05:
@@ -40,24 +39,24 @@ def songrecommender(username):
     song_df_normalised = pd.read_csv("datasets/song_df_normalised.csv")
     
     try:
-        song_name =song_df_normalised[song_df_normalised['track_name'].str.contains(userinput)]['track_name'].tolist()[0]
+        song_name =song_df_normalised[song_df_normalised['song_artist'].str.contains(userinput)]['song_artist'].tolist()[0]
         #song_name = st.selectbox("choose your song", song_dataset)
     
     except IndexError:
         #print("Sorry!! We couldnt get any results for", userinput, " :( ")
         string = "Sorry!! We couldnt get any results for "+ str(userinput) +" :("
         st.error(string)
-        result = 'fail'
-        accurate= 'no'
-        user_review(username, userinput,result,accurate)
+        #result = 'fail'
+        #accurate= 'no'
+        #user_review(username, userinput,result,accurate)
         
     
     else:
         result='success'
         song_artist_list =[]
         artist_list = []
-        song_name_list =song_df_normalised[song_df_normalised['track_name'].str.contains(userinput)]['track_name'].tolist()
-        artist_list = song_df_normalised[song_df_normalised['track_name'].str.contains(userinput)]['track_artist'].tolist()
+        song_name_list =song_df_normalised[song_df_normalised['song_artist'].str.contains(userinput)]['track_name'].tolist()
+        artist_list = song_df_normalised[song_df_normalised['song_artist'].str.contains(userinput)]['track_artist'].tolist()
         
         #for i in range(len(song_name_list)):
         #    song_artist_list.append(song_name_list[i]+" by "+artist_list[i])
@@ -73,14 +72,18 @@ def songrecommender(username):
         #artist_name = song_df_normalised[song_df_normalised['track_name'] == song_name]['track_artist'].tolist()[0]
         st.text("artist name:"+artist_name)    
         
-        genre = song_df_normalised[song_df_normalised['track_name'] == song_name]['playlist_genre'].tolist()[0]
+        genre = song_df_normalised[(song_df_normalised['track_name'] == song_name) & (song_df_normalised['track_artist'] == artist_name)]['playlist_genre'].tolist()[0]
         #st.text("genre of song:"+genre)
         
-        subgenre = song_df_normalised[song_df_normalised['track_name'] == song_name]['playlist_subgenre'].tolist()[0]
+        subgenre = song_df_normalised[(song_df_normalised['track_name'] == song_name) & (song_df_normalised['track_artist'] == artist_name)]['playlist_subgenre'].tolist()[0]
         #st.text("subgenre of song:"+subgenre)
         
         
-        recommend = st.button("click for receommendations ")
+        x = song_df_normalised[(song_df_normalised['track_name'] == song_name) & (song_df_normalised['track_artist'] == artist_name)]['links'].tolist()[0]
+        components.iframe(src="https://w.soundcloud.com/player/?url="+x+"&color=%23ff5500")
+        
+        
+        recommend = st.button("click for more: ")
         if recommend:
             getartistsongs(artist_name,song_name)
             
@@ -138,8 +141,8 @@ def songrecommender(username):
             
         thankyou = st.button("THANK YOU!!")
         if thankyou:
-            final = user_review(username, userinput,result,accurate)
-            st.text(final)
+            #final = user_review(username, userinput,result,accurate)
+            st.text("You're cool!!")
      
 
 def main():
