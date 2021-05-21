@@ -11,6 +11,15 @@ from GenreSearch import *
 
 
 def main():
+    st.title("MARC")
+    
+    
+    #st.sidebar.header("Menu")
+    #option = st.sidebar.selectbox("What do you want to do?", 
+    #                      ['Search Artist','Get song reccomendations','Browse by genre'])
+
+    
+    
     intro = " Hi! I'm MARC, short for Music Analysis and Recommender Chatbot \n (well, my devs are still working on the chatbot, so you can call me MAR)\n Would you mind spending a few minutes to test me out?"
     st.text(intro)
     username = st.text_input("Whats your name?")
@@ -44,12 +53,13 @@ def main():
     
   
     option = st.selectbox("What would you like to do?", 
-                          ['Search Artist','Get song reccomendations','Browse by genre'])
+                          ['Search Artist','Play Music','Browse by genre'])
+    
     st.text(option)
     #gorecommend = st.button("go: ")
     #if gorecommend:
-    if option == 'Get song reccomendations':
-        songrecommender(username)
+    if option == 'Play Music':
+        songrecommender()
     if option == 'Search Artist':
         artistsearch()        
      
