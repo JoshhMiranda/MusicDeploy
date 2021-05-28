@@ -31,7 +31,7 @@ def artistsearch():
         artist_list = song_df_normalised[song_df_normalised['track_artist'].str.contains(userinput)]['track_artist'].tolist()
         
         artist_list = list(set(artist_list))
-        option = st.selectbox("Choose your artist", artist_list)
+        option = st.selectbox("Confirm artist", artist_list)
         x = artist_list.index(option)
         artist_name = artist_list[x]
         
