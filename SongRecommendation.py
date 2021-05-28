@@ -92,7 +92,7 @@ def songrecommender(username):
         
         
         sentiment = song_df_normalised[(song_df_normalised['track_name'] == song_name) & (song_df_normalised['track_artist'] == artist_name)]['sentiment'].tolist()[0]
-        st.info(sentiment)
+        #st.info(sentiment)
         
         songlink = song_df_normalised[(song_df_normalised['track_name'] == song_name) & (song_df_normalised['track_artist'] == artist_name)]['links'].tolist()[0]
         components.iframe(src="https://w.soundcloud.com/player/?url="+songlink+"&color=%23ff5500")
