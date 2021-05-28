@@ -49,8 +49,11 @@ def main():
                     for i in range(history.shape[0]):
                         if history.at[i,'user'] == admininput:
                             history_list = history.at[i,'song_list']
-                            df2 = pd.DataFrame({'history':[history_list]})
-                            st.write(df2)
+                            df2 = pd.DataFrame({'history':[history_list.split(",")]})
+                            df3 = df2.explode('history')
+                            df3 = df3.reset_index()
+                            df3 = df3.drop('index', axis=1)
+                            st.write(df3)
                 
                 
             
