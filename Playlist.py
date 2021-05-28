@@ -135,7 +135,7 @@ def personalplaylist(username):
         
                 
         random.shuffle(playlist)
-        for i in range(15):
+        for i in range(10):
             c = i + 1
             st.text(str(c)+" : "+playlist[i])
             x = song_df_normalised[(song_df_normalised['song_artist'] == playlist[i])]['links'].tolist()[0]
