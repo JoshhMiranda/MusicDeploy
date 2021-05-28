@@ -187,10 +187,10 @@ def streamhistory(username, user_search,sentiment):
     try:
         mode(sentiment_history[:3])
     except StatisticsError:
-        print('Neutral')
+        #print('Neutral')
         sentiment_history = 'Neutral'
     else:
-        print(mode(sentiment_history[:3]))
+        #print(mode(sentiment_history[:3]))
         sentiment_history =  mode(sentiment_history[:3])
     
     return sentiment_history
