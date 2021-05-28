@@ -40,9 +40,11 @@ def main():
                 st.header('Admin Panel')
                 st.subheader('Registered Users:')
                 df1 = registration[['username']]
+                userlist = registration['username'].tolist()
                 st.write(df1)
                 
-                admininput = st.text_input('enter user name: ')
+                #admininput = st.text_input('enter user name: ')
+                admininput = st.selectbox('select user', userlist)
                 if admininput in history['user'].unique():
                     for i in range(history.shape[0]):
                         if history.at[i,'user'] == admininput:
@@ -101,7 +103,9 @@ def main():
     
 def optionfunction(username):  
     intro = "Hi there! Meet MARC. MARC is here to celebrate your victories, \npump you up to survive those workouts, make chores a little less monotonous, \ncry with you when you've got to let it out, you name it, MARCs got it. \nMARC recommends you songs based on its conversation with you. With a few keyboard clicks, \nMARC hand picks the best among a plethora of songs."
-    st.text(intro)
+    st.text(intro+"\nType 'hi marc' to see what you can do!!")
+    instructions = "Try entering: \n1)search artist \n2)play music  \n3)browse by genre \n4)get playlist"
+    st.text(instructions)
     #username = st.text_input("Whats your name?")
  
 #    if username == 'devtesterMARCauthenticcationPaSSworDLJJR':
@@ -133,23 +137,49 @@ def optionfunction(username):
     
   
     st.text("Lets get you started "+str(username)+"!")
-    option = st.selectbox("What would you like to do?", 
-                          ['Search Artist','Play Music','Browse by genre','get playlist'])
+#    option = st.selectbox("What would you like to do?", 
+#                          ['Search Artist','Play Music','Browse by genre','get playlist'])
     
-    st.text(option)
+#    st.text(option)
     #gorecommend = st.button("go: ")
     #if gorecommend:
-    if option == 'Play Music':
+#    if option == 'Play Music':
+#        songrecommender(username)
+#    if option == 'Search Artist':
+#        artistsearch()        
+     
+#    if option == 'Browse by genre':
+#        genresearch()
+    
+#    if option == 'get playlist':
+#        personalplaylist(username)
+  
+
+
+    user_input = st.text_input('hello! try chatting with me!!')
+   
+    if user_input == 'hello' or user_input == 'hi' or user_input == "what's up":
+        st.warning("Hi I'm Marc, enter 'hi marc' to see what i can do!")
+
+    if user_input == 'hi marc':
+        st.text("Try entering: \n1)search artist \n2)play music  \n3)browse by genre \n4)get playlist")
+    
+
+    if user_input == 'play music':
         songrecommender(username)
-    if option == 'Search Artist':
+    
+    
+    if user_input == 'search artist':
         artistsearch()        
      
-    if option == 'Browse by genre':
+    if user_input == 'browse by genre':
         genresearch()
     
-    if option == 'get playlist':
+    if user_input == 'get playlist':
         personalplaylist(username)
-  
+    
+    #else:
+    #    st.text("Sorry, I didn't get that")
     
 if __name__  == '__main__':
     main()
