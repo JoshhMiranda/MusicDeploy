@@ -49,11 +49,20 @@ def main():
                     for i in range(history.shape[0]):
                         if history.at[i,'user'] == admininput:
                             history_list = history.at[i,'song_list']
-                            df2 = pd.DataFrame({'history':[history_list.split(",")]})
-                            df3 = df2.explode('history')
-                            df3 = df3.reset_index()
-                            df3 = df3.drop('index', axis=1)
-                            st.write(df3)
+                            history_list = history_list.split(",")
+                            
+                            sentiment_list = history.at[i,'song_sentiment']
+                            sentiment_list = sentiment_list.split(",")
+                            #df2 = pd.DataFrame({'history':[history_list.split(",")]})
+                            df2 = pd.DataFrame(columns=['history','sentiment'])
+                            #df3 = df2.explode('history')
+                            #df3 = df3.reset_index()
+                            #df3 = df3.drop('index', axis=1)
+                            #st.write(df3)
+                            for i in range(len(history_list)):
+                                tempdf = pd.DataFrame({'history':[history_list[i]], 'sentiment':[sentiment_list[i]]})
+                                df2 = df2.append(tempdf,ignore_index=True)
+                            st.write(df2)
                 
                 
             
